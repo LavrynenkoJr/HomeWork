@@ -1,10 +1,32 @@
 package com.company;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvocationTargetException, IllegalAccessException {
+
+        Tank tank = new Tank();
+
+        Class reflactionClss = tank.getClass();
+
+        if (reflactionClss.isAnnotationPresent(FirstAnnotation.class)){
+
+            Method[] methods = reflactionClss.getMethods();
+
+            for (Method md: methods) {
+                if (md.isAnnotationPresent(InitAnnotation.class)){
+                    md.invoke(tank, null);
+                }
+            }
+
+        }
+
+    }
+}
+
 
         /*Дана строка, Вам требуется преобразовать все идущие подряд пробелы в один.
         Дана строка. Разбить строку, не разрывая слова, на подстроки таким образом,
@@ -13,7 +35,7 @@ public class Main {
                 введённое пользователем, палиндромом (примеры: «комок», «ротор»). Если введено слово не из 5 букв,
                 то сообщать об ошибке. Программа должна нормально обрабатывать слово,
                 даже если в нём использованы символы разного регистра.
-                Например, слова «Комок» или «РОТОР» следует также считать палиндромами.*/
+                Например, слова «Комок» или «РОТОР» следует также считать палиндромами.*//*
 
         separateString(" Sergey Lavrynenko Oleksandrovich ", 5);
         System.out.println();
@@ -99,4 +121,4 @@ public class Main {
 
         return result;
     }
-}
+}*/
